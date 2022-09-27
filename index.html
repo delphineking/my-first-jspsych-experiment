@@ -10,6 +10,7 @@
               rel="stylesheet" type="text/css" />
         <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.1">
         </script>
+        <script src="stimuli.js"></script>
     </head>
 <body>
 <script>
@@ -30,7 +31,7 @@ trial_duration: 1000
 
     var sentence = {
         type: jsPsychHtmlKeyboardResponse,
-        stimulus: 'You dropped a balloon on a vase',
+        stimulus: jsPsych.timelineVariable('sentence'),
         choices: " "
     }
 
@@ -44,7 +45,7 @@ trial_duration: 1000
    
     var picture = {
         type: jsPsychImageKeyboardResponse,
-        stimulus: "196940025873.jpg",
+        stimulus: jsPsych.timelineVariable('pic'),
         choices: ['S', 'N', 's', 'n']
     }
 
@@ -52,9 +53,14 @@ trial_duration: 1000
         type: jsPsychHtmlKeyboardResponse,
         stimulus: 'Thank you for participating! Click any key to end the experiment.'
     };
-    
 
-    jsPsych.run([fixation1, sentence, fixation2, picture, end_experiment]);
+    var experiment_procedure = {
+        timeline: [fixation1, sentence, fixation2, picture],
+        timeline_variables: stimuli,
+        randomize_order: false
+    };
+
+    jsPsych.run([experiment_procedure, end_experiment]);
 
     </script>
 
