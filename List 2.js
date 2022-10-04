@@ -1,4 +1,4 @@
-﻿var list 2 =
+﻿var list2 =
 [
   {
     "sentence": "You drop a bowling ball on a porcelain figure",
